@@ -1,0 +1,46 @@
+# Windows Terminal Commands for AI PM Buddy v2.0 Installation
+# ======================================================
+# These commands assume Windows 11 with Python 3.11+ already installed
+# Target directory: C:\Users\A726951\python_trial\pm_buddy2
+
+# 1. Create installation directory
+mkdir C:\Users\A726951\python_trial\pm_buddy2
+cd C:\Users\A726951\python_trial\pm_buddy2
+
+# 2. Create and activate virtual environment
+python -m venv venv
+venv\Scripts\activate
+
+# 3. Install required packages
+pip install streamlit matplotlib networkx openai plotly pygraphviz python-dotenv wordcloud twilio
+
+# Note: If pygraphviz installation fails, try these alternative installation commands:
+# Option A (requires Visual Studio Build Tools):
+# pip install --global-option=build_ext --global-option="-IC:\Program Files\Graphviz\include" --global-option="-LC:\Program Files\Graphviz\lib" pygraphviz
+
+# Option B (use pre-built wheel):
+# pip install https://download.lfd.uci.edu/pythonlibs/archived/pygraphviz-1.10-cp311-cp311-win_amd64.whl
+
+# 4. Set up environment
+# Edit the .env file and add your OpenAI API key
+
+# 5. Create required data directories
+mkdir data
+
+# 6. Run the application
+streamlit run app_v2.py --server.port 8502
+
+# 7. Open in browser (should open automatically, but if not)
+# Navigate to: http://localhost:8502/
+
+# Troubleshooting
+# ---------------
+# If port 8502 is already in use:
+# 1. Find the process using the port:
+#    netstat -ano | findstr :8502
+# 2. Kill the process (replace PID with the process ID from the previous command):
+#    taskkill /F /PID PID
+#
+# If you encounter "ModuleNotFoundError":
+# 1. Ensure you've activated the virtual environment: venv\Scripts\activate
+# 2. Install the missing module: pip install [module_name]
